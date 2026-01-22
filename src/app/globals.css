@@ -1,0 +1,130 @@
+/* Global CSS with Custom Design System */
+
+:root {
+  /* Light Mode Defaults */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --sidebar-bg: #f9f9f9;
+  --border: #e5e5e5;
+
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+
+  --accent: #f0f0f0;
+  --accent-foreground: #000000;
+
+  --muted: #737373;
+  --muted-foreground: #a3a3a3;
+}
+
+.dark {
+  /* Dark Mode - Premium SaaS Feel (Zinc Palette) */
+  --background: #09090b;
+  /* Zinc 950 */
+  --foreground: #fafafa;
+  /* Zinc 50 */
+  --sidebar-bg: #101012;
+  /* Slightly lighter than bg */
+  --border: #27272a;
+  /* Zinc 800 */
+
+  --primary: #ffffff;
+  --primary-foreground: #09090b;
+
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+
+  --muted: #a1a1aa;
+  /* Zinc 400 */
+  --muted-foreground: #71717a;
+  /* Zinc 500 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    /* Optional: If we want to default to dark in CSS when no class is present, 
+       but we are handling "system" in JS by adding .dark class. 
+       So we can actually leave this empty or duplicate the variables if we wanted 
+       CSS-only support without JS. 
+       For now, let's rely on the JS class toggling for consistency. 
+    */
+  }
+}
+
+/* Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.relative {
+  position: relative;
+}
