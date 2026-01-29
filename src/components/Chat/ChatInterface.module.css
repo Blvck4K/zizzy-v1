@@ -1,0 +1,840 @@
+/* ChatInterface.module.css */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    background-color: var(--background);
+    width: 100%;
+}
+
+.header {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.5);
+    /* Light mode tint */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .header {
+    background: rgba(9, 9, 11, 0.5);
+    /* Dark mode tint */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+.toggleContainer {
+    display: flex;
+    background-color: var(--accent);
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+}
+
+.toggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    color: var(--muted-foreground);
+    cursor: pointer;
+}
+
+.toggleBtn:hover {
+    color: var(--foreground);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .toggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.toggleBtnActive {
+    background-color: var(--background);
+    color: var(--foreground);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.badge {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    padding: 0.25rem 0.5rem;
+    background-color: var(--accent);
+    border-radius: 0.25rem;
+}
+
+.contentWrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ZERO STATE STYLES */
+.zeroStateContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.greetingHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logoWrapper {
+    width: 64px;
+    height: 64px;
+    position: relative;
+}
+
+.zeroLogo {
+    object-fit: contain;
+}
+
+.logoLight {
+    object-fit: contain;
+    display: block;
+}
+
+.logoDark {
+    object-fit: contain;
+    display: none;
+}
+
+:global(.dark) .logoLight {
+    display: none;
+}
+
+:global(.dark) .logoDark {
+    display: block;
+}
+
+.greetingTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0;
+    line-height: 1.1;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .greetingTitle {
+        font-size: 2rem;
+    }
+}
+
+.highlightName {
+    color: #0ea5e9;
+    /* Sky 500 - nice blue */
+    background: -webkit-linear-gradient(45deg, #0ea5e9, #2563eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.greetingSubtitle {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    /* Darker gray like in image */
+    margin: 0;
+    opacity: 0.6;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .greetingSubtitle {
+        font-size: 1.25rem;
+    }
+}
+
+.zeroInputWrapper {
+    width: 100%;
+    max-width: 700px;
+    margin-top: 1rem;
+}
+
+.inputContainer {
+    background-color: var(--accent);
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    min-height: 120px;
+}
+
+.inputContainer:focus-within {
+    border-color: var(--muted-foreground);
+    box-shadow: 0 0 0 1px var(--muted-foreground);
+}
+
+.inputTopRow {
+    flex: 1;
+    display: flex;
+}
+
+.inputBottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+
+.zeroInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--foreground);
+    font-size: 1.125rem;
+    width: 100%;
+    resize: none;
+}
+
+.zeroInput::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.5;
+}
+
+.attachBtn {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.attachBtn:hover {
+    color: var(--foreground);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.zeroSendBtn {
+    background-color: var(--foreground);
+    color: var(--background);
+    border: none;
+    border-radius: 0.5rem;
+    /* Or circle if preferred, trying retrieval style */
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.zeroSendBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 700px;
+}
+
+.suggestionsLabel {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.suggestionChips {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 0.75rem 1rem;
+    background-color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chip:hover {
+    background-color: var(--border);
+    color: var(--foreground);
+}
+
+/* ACTIVE STATE STYLES */
+
+.messagesArea {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.messagesArea::-webkit-scrollbar {
+    display: none;
+}
+
+.messageRow {
+    display: flex;
+    gap: 1rem;
+    max-width: 100%;
+    width: 100%;
+}
+
+.messageRowUser {
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avatarAssistant {
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.avatarUser {
+    background-color: var(--accent);
+    color: var(--foreground);
+    overflow: hidden;
+}
+
+.userProfileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.messageContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: 85%;
+}
+
+.messageContentUser {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.senderName {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    text-transform: capitalize;
+}
+
+.bubble {
+    display: inline-block;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    line-height: 1.625;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.bubbleAssistant {
+    background-color: transparent;
+    color: var(--foreground);
+    padding-left: 0;
+}
+
+.bubbleUser {
+    background-color: var(--accent);
+    color: var(--foreground);
+}
+
+.statusBubble {
+    font-style: italic;
+    opacity: 0.8;
+    background: transparent;
+    padding: 0;
+}
+
+.statusText {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: pulse 1.5s ease-in-out infinite;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+.typingIndicator {
+    display: flex;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.typingText {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    display: flex;
+    align-items: center;
+}
+
+.inputArea {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.5);
+    /* Semi transparent for glass effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+}
+
+:global(.dark) .inputArea {
+    background: rgba(9, 9, 11, 0.5);
+}
+
+.inputWrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--accent);
+    padding: 0.75rem;
+    border-radius: 1.5rem;
+    /* Pill shape */
+    border: 1px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.inputWrapper:focus-within {
+    border-color: var(--foreground);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background-color: var(--background);
+    transform: translateY(-2px);
+}
+
+.iconBtn {
+    padding: 0.5rem;
+    color: var(--muted-foreground);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconBtn:hover {
+    color: var(--foreground);
+}
+
+.inputField {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--foreground);
+    font-size: 0.9375rem;
+    padding: 0 0.5rem;
+}
+
+.inputField::placeholder {
+    color: var(--muted-foreground);
+}
+
+.sendBtn {
+    padding: 0.5rem;
+    background-color: var(--foreground);
+    color: var(--background);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.sendBtn:hover {
+    opacity: 0.9;
+}
+
+.disclaimer {
+    text-align: center;
+    font-size: 0.625rem;
+    color: var(--muted-foreground);
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+/* Markdown Formatting */
+.formattedText {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.markdownH1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem 0;
+    color: var(--foreground);
+    line-height: 1.2;
+}
+
+.markdownH2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0.75rem 0 0.5rem 0;
+    color: var(--foreground);
+    line-height: 1.3;
+    display: block;
+}
+
+.markdownH3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0.5rem 0 0.25rem 0;
+    color: var(--foreground);
+    display: block;
+}
+
+.codeBlock {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    overflow-x: auto;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.875rem;
+    border: 1px solid var(--border);
+}
+
+.codeLang {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.inlineCode {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--foreground);
+}
+
+@media (max-width: 768px) {
+    .hideOnMobile {
+        display: none;
+    }
+
+    .header {
+        padding-left: 3.5rem;
+        /* Space for fixed sidebar toggle */
+    }
+}
+
+/* Message Components & Enhancements */
+
+.messageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.messageActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+/* Show actions on hover */
+.messageContainer:hover .messageActions {
+    opacity: 1;
+}
+
+.copyButton {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    transition: all 0.2s;
+}
+
+.copyButton:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--foreground);
+}
+
+.sourcesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.sourceChip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: all 0.2s;
+    max-width: 200px;
+}
+
+.sourceChip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--foreground);
+    transform: translateY(-1px);
+}
+
+.sourceFavicon {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.sourceTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.9;
+}
+
+/* Code Block Enhancements */
+.codeBlockWrapper {
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.codeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--border);
+}
+
+.copyCodeBtn {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 2px;
+    transition: color 0.2s;
+}
+
+.copyCodeBtn:hover {
+    color: var(--foreground);
+}
+
+.codeBlock {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+/* File Card Styles */
+.fileCardWrapper {
+    margin: 0.5rem 0;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.fileCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+    transition: background 0.2s;
+}
+
+.fileCardHeader:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.fileCardLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    overflow: hidden;
+}
+
+.fileIcon {
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.fileInfo {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.fileName {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fileLang {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.expandBtn {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.expandBtn:hover {
+    color: var(--foreground);
+}
+
+.fileCardContent {
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.fileCardContent pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    font-family: 'Geist Mono', monospace;
+    white-space: pre;
+    color: var(--muted-foreground);
+}
