@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Upload, FileCode, FileText, Code2, Terminal, Play, Check, Sparkles, Wind } from "lucide-react";
+import { Upload, Terminal } from "lucide-react";
 import styles from "./DeveloperWorkspace.module.css";
 import clsx from "clsx";
 
@@ -13,6 +13,16 @@ export default function QuickDropZone({ onFileAction }: QuickDropZoneProps) {
     const [selectedModel, setSelectedModel] = useState<'gemini' | 'mistral'>('gemini');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    // Helper to read file content
+    const processFile = async (file: File) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const content = e.target?.result as string;
+            setDroppedFile({ file, content });
+        };
+        reader.readAsText(file);
+    };
+
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
         setIsDragging(true);
@@ -23,25 +33,13 @@ export default function QuickDropZone({ onFileAction }: QuickDropZoneProps) {
     };
 
     const handleDrop = async (e: React.DragEvent) => {
-        export default function QuickDropZone() {
-            return (
-                <div className={styles.quickDropZone}>
-                    <div className={styles.dropText}>
-                        <Upload size={20} />
-                        <span>Quick-Drop is locked</span>
-                    </div>
-                    <div className={styles.actionButtons}>
-                        <span style={{ color: 'var(--muted-foreground)', fontWeight: 600 }}>Coming in v2</span>
-                    </div>
-                </div>
-            );
+        e.preventDefault();
+        setIsDragging(false);
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            await processFile(file);
         }
-                <button onClick={() => setDroppedFile(null)} className={styles.cancelBtn}>
-                    Cancel
-                </button>
-            </div>
-        );
-    }
+    };
 
     return (
         <div
@@ -58,15 +56,36 @@ export default function QuickDropZone({ onFileAction }: QuickDropZoneProps) {
                 style={{ display: 'none' }}
                 onChange={(e) => e.target.files && processFile(e.target.files[0])}
             />
-            <div className={styles.emptyState}>
-                <Terminal size={32} className={styles.terminalIcon} />
-                <p className={styles.terminalText}>
-                    Drop something here to think with AI <span className={styles.cursor}>_</span>
-                </p>
-                <div className={styles.supportedFormats}>
-                    .js .ts .py .sql .md .txt
+            
+            {!droppedFile ? (
+                <div className={styles.emptyState}>
+                    <Terminal size={32} className={styles.terminalIcon} />
+                    <p className={styles.terminalText}>
+                        Drop something here to think with AI <span className={styles.cursor}>_</span>
+                    </p>
+                    <div className={styles.supportedFormats}>
+                        .js .ts .py .sql .md .txt
+                    </div>
                 </div>
-            </div>
+            ) : (
+                <div className={styles.quickDropZone}>
+                    <div className={styles.dropText}>
+                        <Upload size={20} />
+                        <span>{droppedFile.file.name} is ready</span>
+                    </div>
+                    <div className={styles.actionButtons}>
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setDroppedFile(null);
+                            }} 
+                            className={styles.cancelBtn}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
