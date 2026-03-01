@@ -1,0 +1,174 @@
+.popup {
+    position: absolute;
+    left: 100%;
+    /* Position to the right of the sidebar */
+    top: 60px;
+    /* Align roughly with the History button or nav */
+    width: 280px;
+    background-color: rgba(249, 249, 249, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    margin-left: 0.5rem;
+    animation: slideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: top left;
+}
+
+:global(.dark) .popup {
+    background-color: rgba(16, 16, 18, 0.85);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0;
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    color: var(--foreground);
+    background-color: var(--accent);
+}
+
+.list {
+    padding: 0.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.emptyState {
+    padding: 1rem;
+    text-align: center;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.25rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.item:hover {
+    background-color: var(--accent);
+}
+
+.activeItem {
+    background-color: var(--accent);
+    border-color: var(--border);
+}
+
+.itemTitle {
+    font-size: 0.875rem;
+    color: var(--foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0;
+    /* Hide by default */
+    transition: opacity 0.2s;
+}
+
+.item:hover .actions {
+    opacity: 1;
+    /* Show on hover */
+}
+
+.actionBtn {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionBtn:hover {
+    color: var(--foreground);
+    background-color: var(--background);
+}
+
+.activePin {
+    color: var(--foreground);
+}
+
+.editContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.25rem;
+}
+
+.editInput {
+    flex: 1;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    color: var(--foreground);
+    outline: none;
+    min-width: 0;
+}
+
+.editInput:focus {
+    border-color: var(--primary);
+}
