@@ -507,10 +507,7 @@ export default function ChatInterface({ initialMode = 'explorer', initialContext
                 setStreamingMessage(accumulatedResponse);
             }
 
-            // If this is the first AI response after onboarding, append a gentle follow-up suggestion
-            if (!messages.length && isFirstSignIn) {
-                accumulatedResponse = accumulatedResponse.trim().replace(/([.!?])$/, '$1') + "\n\n_If you want to try something else, just ask or pick another prompt below!_";
-            }
+
 
             // Stream finished. Now save to DB and Context.
             if (activeId && accumulatedResponse) {
@@ -632,11 +629,7 @@ export default function ChatInterface({ initialMode = 'explorer', initialContext
                                 Hi <span className={styles.highlightName}>{profileName}</span> 👋
                             </h1>
                         </div>
-                        {isFirstSignIn && (
-                            <div className={styles.onboardPurpose}>
-                                I can help you explore ideas, plan tasks, and understand topics clearly.
-                            </div>
-                        )}
+
                         <h2 className={styles.greetingSubtitle}>
                             {mode === 'developer'
                                 ? "Zizzy’s Developer tools are currently locked and will be available in a future release. Right now, I’m here to help you explore ideas, plan, and learn."
@@ -681,11 +674,7 @@ export default function ChatInterface({ initialMode = 'explorer', initialContext
                                         autoFocus
                                     />
                                 </div>
-                                {isFirstSignIn && (
-                                    <div className={styles.inputHelper}>
-                                        Ask a question or pick a prompt below to get started.
-                                    </div>
-                                )}
+
                                 <div className={styles.inputBottomRow}>
                                     <button onClick={triggerFileInput} className={styles.attachBtn} title="Import (Images, Files)">
                                         <Plus size={20} />
